@@ -1,0 +1,645 @@
+<!doctype html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- og 파비콘 -->
+<meta property="og:title" content="Bong Eun Sa 봉은사"/>
+<meta property="og:description" content="바른마음 가짐이 비로소 나를 만든다."/>
+<meta property="og:image" content="images/main.jpg"/>
+<link rel="shortcut icon" href="images/icon.png" />
+<link rel="apple-touch-icon" href="images/icon.ico"/>
+
+
+<title>봉은사 BongEunSa</title>
+
+<!-- 폰트 -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+
+<!-- sec03 탭바 -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+<!-- sec05슬라이드 -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+
+<link rel="stylesheet" href="css/animate.css">
+
+<!-- css -->
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/style.css">
+
+<!-- js -->
+<link rel="stylesheet" type="text/css" href="js/script.js"/>
+
+
+
+<style>
+
+    /* 지도지도지도지도지도 */
+    .customoverlay {position:relative;bottom:85px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
+        .customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
+        .customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;font-weight:bold;overflow:hidden;background: #69a32a;background: #69a32a url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
+        .customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:bold;}
+        .customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+
+@font-face{
+    font-family:swiper-icons;
+    src:url('data:application/font-woff;charset=utf-8;base64, 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') format('woff');
+    font-weight:400;font-style:normal;
+    }
+    :root{
+        --swiper-theme-color:#fffaed;
+    }
+    .swiper-container{
+        margin-left:auto;
+        margin-right:auto;
+        position:relative;
+        overflow:hidden;
+        list-style:none;
+        padding:0;
+        z-index:1;
+    }
+</style>
+</head>
+
+
+
+
+<body>
+
+<!-- section01시작 -->
+<div id="section01">
+
+    <!-- 메뉴 박스 시작 -->
+    <div class="menu_box">
+        <div class="logo"><a href="#section01"><img src="images/logo.png" alt="봉은사로고"></a></div>
+        <div class="sec01-menu">
+            <nav class="menuNav" id="menuNav">
+                <ul>
+                    <li><a href="#section01" class="menu01">봉은사</a></li>
+                    <li><a href="#section02" class="menu02">소개</a></li>
+                    <!-- <li><a href="#section03" class="menu03">사찰 안내도</a></li> -->
+                    <li><a href="#section04" class="menu04">사진첩</a></li>
+                    <li><a href="#section05" class="menu05">주변 볼거리</a></li>
+                    <li><a href="#section06" class="menu06">지도</a></li>
+                </ul>
+                <span class="xi-bars menu-btn"></span>   
+            </nav>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        $(function(){
+            $('.menu-btn').click(function(){
+                $('.menuNav>ul').slideToggle();
+            });
+        });
+    </script>
+    <!-- 메뉴 박스 끝 -->
+    
+    <div class="main-text wow fadeIn" data-wow-duration="2s">
+        <p class="sub-txt">바른마음 가짐이 비로소 나를 만든다</p>
+        <p class="main-txt"> 봉은사</p>
+    </div>
+
+</div>
+<script src="js/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+<!-- div -->
+
+<!-- section01 -->
+
+
+
+
+
+<div id="section02">
+
+    <!-- 기본적으로 다 들어가야 될 것들 -->
+    <div class="wrapper">
+        <div class="intro">
+            <p>소개</p>
+            <div class="border"></div>
+            <h1>봉은사 속에 담긴 의미</h1>
+        </div>
+    </div>
+    <div class="sec02-content">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide">
+                    <img src="images/sec02bg01.png" alt="" >
+                    <div class="sec02-layer">
+                        <div class="border02"></div>
+                        <div class="sec02-layer02">
+                            <h1>봉은사</h1>
+                            <div class="sec02-border"></div>
+                            <p>
+                                봉은사는 천년을 이어온 역사와 보우대사의<br>불교 중흥 원력
+                                계승하여 선종수사찰의 전통을 오늘에 재현하고,<br>
+                                참다운 나를 찾아가는 끊임없는 수행과 자비를 실천하는<br>
+                                보살행의 으뜸 성지를 이룩한다.
+                            </p>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <img src="images/sec02bg02.png" alt="">
+                    <div class="sec02-layer">
+                        <div class="border02"></div>
+                        <div class="sec02-layer02">
+                            <h1>대웅전</h1>
+                            <div class="sec02-border"></div>
+                            <p>
+                                대웅전은 1982년 새롭게 중창되었으며 법당 안에는 2층 닫집을 짓고
+                                중앙에는 석가모니 부처님을 주불로 모시고 좌우로는 아미타불과 
+                                약사여래 부처님 등 삼존불(보물 제1819호 서울 봉은사 목조석가여래삼불좌상)을
+                                모셨으며 후불탱화는 삼여래회상도가 안치되어있다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <img src="images/sec02bg03.png" alt="">
+                    <div class="sec02-layer">
+                        <div class="border02"></div>
+                        <div class="sec02-layer02">
+                            <h1>미륵대불</h1>
+                            <div class="sec02-border"></div>
+                            <p>
+                                미륵대불은 1986년 영암큰스님께서 발원하여 봉은사 사부대중이
+                                모두 참여하여 1만 명 이상이 불사에 동참하여 10년간에 걸쳐
+                                이루어진 대작불사로 1996년에 완공되어 봉은사 성보로써 높이
+                                23m로 국내 최대의 크기의 부처님이다.
+                                현재 미륵전과 미륵부처님이 모셔진 광장은 신도들의 기도 장소이지만
+                                경우에 따라 공연 등 문화 행사장으로 사용된다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <img src="images/sec02bg04.png" alt="">
+                    <div class="sec02-layer">
+                        <div class="border02"></div>
+                        <div class="sec02-layer02">
+                            <h1>지장전</h1>
+                            <div class="sec02-border"></div>
+                            <p>
+                                지장전은 주불로 지장보살을 모시고 죽은 이의 
+                                넋을 인도하여 극락왕생하도록 기원하는 전각이다. 
+                                지장보살은 석가모니 부처님의 원을 이어 고통과 어려움에 
+                                처해 있는 중생들을 구하고 병든 사람을 위해 약초가 
+                                되겠다는 서원을 세워 ‘원력의 보살’이라고도 하고, 지옥중생들이 모두 
+                                구제될 때까지 지옥에서 함께 고통을 받으며 중생을 구하겠다는 서원을 세워 
+                                ‘악세중생의 부처님’이라고도 부른다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+</div>
+
+
+      <script>
+        var swiper = new Swiper('.swiper-container', {
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+
+
+      </script>
+<!-- section02 -->
+
+
+<div id="section04">
+    
+    <!-- 기본적으로 다 들어가야 될 것들 -->
+    <div class="wrapper">
+        <div class="intro">
+            <p>사진첩</p>
+            <div class="border"></div>
+            <h1>봉은사의 아름다운 풍경</h1>
+        </div>
+    </div>
+
+    <div class="sec04">
+        <div class="row">
+            <div class="column">
+              <img src="images/sec04bg01.jpg" style="width:100%" onclick="openModal();currentSlide(1)" class="hover-shadow cursor">
+            </div>
+            <div class="column">
+              <img src="images/sec04bg02.jpg" style="width:100%" onclick="openModal();currentSlide(2)" class="hover-shadow cursor">
+            </div>
+            <div class="column">
+              <img src="images/sec04bg03.jpg" style="width:100%" onclick="openModal();currentSlide(3)" class="hover-shadow cursor">
+            </div>
+            <div class="column">
+              <img src="images/sec04bg04.jpg" style="width:100%" onclick="openModal();currentSlide(4)" class="hover-shadow cursor">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+              <img src="images/sec04bg05.jpg" style="width:100%" onclick="openModal();currentSlide(5)" class="hover-shadow cursor">
+            </div>
+            <div class="column">
+              <img src="images/sec04bg06.jpg" style="width:100%" onclick="openModal();currentSlide(6)" class="hover-shadow cursor">
+            </div>
+            <div class="column">
+              <img src="images/sec04bg07.jpg" style="width:100%" onclick="openModal();currentSlide(7)" class="hover-shadow cursor">
+            </div>
+            <div class="column">
+              <img src="images/sec04bg08.jpg" style="width:100%" onclick="openModal();currentSlide(8)" class="hover-shadow cursor">
+            </div>
+        </div>
+          <div id="myModal" class="modal">
+            <span class="close cursor" onclick="closeModal()">&times;</span>
+            <div class="modal-content">
+          
+              <div class="mySlides">
+                <div class="numbertext">1 / 8</div>
+                <img src="images/sec04bg01.jpg" style="width:100%;">
+              </div>
+          
+              <div class="mySlides">
+                <div class="numbertext">2 / 8</div>
+                <img src="images/sec04bg02.jpg" style="width:100%">
+              </div>
+          
+              <div class="mySlides">
+                <div class="numbertext">3 / 8</div>
+                <img src="images/sec04bg03.jpg" style="width:100%">
+              </div>
+              
+              <div class="mySlides">
+                <div class="numbertext">4 / 8</div>
+                <img src="images/sec04bg04.jpg" style="width:100%">
+              </div>
+    
+              <div class="mySlides">
+                <div class="numbertext">5 / 8</div>
+                <img src="images/sec04bg05.jpg" style="width:100%">
+              </div>
+          
+              <div class="mySlides">
+                <div class="numbertext">6 / 8</div>
+                <img src="images/sec04bg06.jpg" style="width:100%">
+              </div>
+          
+              <div class="mySlides">
+                <div class="numbertext">7 / 8</div>
+                <img src="images/sec04bg07.jpg" style="width:100%">
+              </div>
+              
+              <div class="mySlides">
+                <div class="numbertext">8 / 8</div>
+                <img src="images/sec04bg08.jpg" style="width:100%">
+              </div>
+              
+              
+              <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+              <a class="next" onclick="plusSlides(1)">&#10095;</a>
+          
+          
+          
+            
+            </div>
+          </div>
+
+    </div>
+    
+
+
+      <script>
+        
+
+</script>
+
+
+
+<div id="section05">
+    
+    <!-- 기본적으로 다 들어가야 될 것들 -->
+    <div class="wrapper">
+        <div class="intro">
+            <p>주변 볼거리</p>
+            <div class="border"></div>
+            <h1>봉은사 주변 다양한 볼거리</h1>
+        </div>
+    </div> 
+        <!-- -------끝------- -->
+
+        <div class="sec05-container">
+            <div class="sec05-content">
+                <img src="images/sec05_bg01.jpg" style="height: 100%;">
+                <div class="overlay">
+                    <div class="sec05text">
+                        <h2>별마당 도서관</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="sec05-content">
+                <img src="images/sec05_bg02.jpg" style="height: 100%;">
+                <div class="overlay">
+                    <div class="sec05text">
+                        <h2>메가박스</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="sec05-content">
+                <img src="images/sec05_bg03.jpg" style="height: 100%;">
+                <div class="overlay">
+                    <div class="sec05text">
+                        <h2>아쿠아리움</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<!-- section05 -->
+
+
+
+
+
+
+<div id="section06">
+    <!-- 기본적으로 다 들어가야 될 것들 -->
+    <div class="wrapper">
+        <div class="intro">
+            <p>지도</p>
+            <div class="border"></div>
+            <h1>봉은사로 오시는 길</h1>
+        </div>
+        <div class="sec06-container">
+            <div id="map" class=" wow slideInLeft"></div>
+            <div class="slideshow-container wow slideInRight" data-wow-duration="2s">
+                <div class="sec06-wrapper">
+                    <div class="sec06-warp">
+                        <div class="tab">
+                            <button class="tablinks" onclick="openCity(event, 'London')">주소</button>
+                            <button class="tablinks" onclick="openCity(event, 'Paris')">대중교통 버스</button>
+                            <button class="tablinks" onclick="openCity(event, 'Tokyo')">대중교통 지하철</button>
+                          </div>
+                          
+                          <div id="London" class="tabcontent" style="display: block;">
+                            <h3>주소</h3>
+                            <p>서울시 강남구 봉은사로 531(삼성동 73)</p>
+                          </div>
+                          
+                          <div id="Paris" class="tabcontent" style="display: none;">
+                            <h3>대중교통 버스</h3>
+                            <p><span>9호선</span>봉은사역 1번 출구</p> 
+                          </div>
+                          
+                          <div id="Tokyo" class="tabcontent" style="display: none;">
+                            <h3>대중교통 지하철</h3>
+                            <p><span>간선</span>143 146 301 342 362 3412</p>
+                            <p><span>지선</span>2413 2415 3217 3411 3412 3414 4318 4419 강남08</p>
+                            <p><span>직행</span>9407 9507 9607</p>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function openCity(evt, cityName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+    </script>
+<!-- '<script>
+        var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("sec06-slide");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+}
+</script>' -->
+    
+
+
+
+<!-- 지도지도지도지도지도 -->
+    <script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=d7a7dfad46f17498cce6b28eb7ab815c"></script>
+    <script type="text/javascript">
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+  mapOption = { 
+        center: new kakao.maps.LatLng(37.515384, 127.057409), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+var map = new kakao.maps.Map(mapContainer, mapOption);
+
+var imageSrc ='images/maplogo.png', // 마커이미지의 주소입니다    
+    imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+    markerPosition = new kakao.maps.LatLng(37.515384, 127.057409); // 마커가 표시될 위치입니다
+
+// 마커를 생성합니다
+var marker = new kakao.maps.Marker({
+  position: markerPosition,
+  image: markerImage // 마커이미지 설정 
+});
+
+// 마커가 지도 위에 표시되도록 설정합니다
+marker.setMap(map);  
+
+// 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+var content = '<div class="customoverlay">' +
+    '  <a href="https://map.kakao.com/?urlX=512745&urlY=1115555&urlLevel=3&itemId=8373155&q=%EB%B4%89%EC%9D%80%EC%82%AC&srcid=8373155&map_type=TYPE_MAP" target="_blank">' +
+    '    <span class="title">봉은사</span>' +
+    '  </a>' +
+    '</div>';
+
+// 커스텀 오버레이가 표시될 위치입니다 
+var position = new kakao.maps.LatLng(37.515384, 127.057409);  
+
+// 커스텀 오버레이를 생성합니다
+var customOverlay = new kakao.maps.CustomOverlay({
+    map: map,
+    position: position,
+    content: content,
+    yAnchor: 1 
+});
+    </script>
+
+
+
+<footer class="footer">
+
+    <div class="footer-container">
+        <div class="footer-contet">
+            <p>주소: 서울시 강남구 봉은사로 531(삼성동 73)</p>
+            <p>대표전화: 02-3218-4800</p>
+            <p>FAX: 02-544-2141</p>
+        </div>
+        <p><br>ⓒ2020 JGY All Rights Reserved.</p>
+    </div>
+
+</footer>
+
+
+
+
+
+
+
+
+
+<script>
+	/**스크롤이 설정한 높이 이상 내려갔을때 스타일추가하기**/
+	if (jQuery(window).width() > 0) {
+    jQuery(window).on("scroll",function(ev){
+        if(jQuery(window).scrollTop() > 150 ) { /**높이 픽셀 조정**/
+            jQuery('.menu_box').addClass('fixed');  /**위의 높이에서 .fixed 클래스를 추가합니다. 스타일에서 자유롭게 수치 조절 가능합니다.**/
+        }
+        else{
+			jQuery('.menu_box').removeClass('fixed');
+        }
+        return false;
+    });
+	}
+	
+	// /**마우스 부드럽게 해당위치로 이동**/
+	// $(function(){
+	//    $('a[href^=#]').click(function() {
+	// 	  var speed = 800;
+	// 	  var href= $(this).attr("href");
+	// 	  var target = $(href == "#" || href == "" ? 'html' : href);
+	// 	  var position = target.offset().top;
+	// 	  $('body,html').animate({scrollTop:position}, speed, 'swing');
+	// 	  return false;
+	//    });
+    // });
+    
+
+    // 부드럽게 내려가기
+    $(function(){
+        $(".logo").click(function(){
+            var offset = $("#section01").offset();
+            $("html,body").animate({scrollTop : offset.top}, 800);
+        });
+        $(".menu01").click(function(){
+            var offset = $("#section01").offset();
+            $("html,body").animate({scrollTop : offset.top}, 800);
+        });
+        $(".menu02").click(function(){
+            var offset = $("#section02").offset();
+            $("html,body").animate({scrollTop : offset.top}, 800);
+        }); 
+        $(".menu03").click(function(){
+            var offset = $("#section03").offset();
+            $("html,body").animate({scrollTop : offset.top}, 800);
+        }); 
+        $(".menu04").click(function(){
+            var offset = $("#section04").offset();
+            $("html,body").animate({scrollTop : offset.top}, 800);
+        }); 
+        $(".menu05").click(function(){
+            var offset = $("#section05").offset();
+            $("html,body").animate({scrollTop : offset.top}, 800);
+        }); 
+        $(".menu06").click(function(){
+            var offset = $("#section06").offset();
+            $("html,body").animate({scrollTop : offset.top}, 800);
+        }); 
+    });
+
+
+
+
+        function openModal() {
+          document.getElementById("myModal").style.display = "block";
+        }
+        
+        function closeModal() {
+          document.getElementById("myModal").style.display = "none";
+        }
+        
+        var slideIndex = 1;
+        showSlides(slideIndex);
+        
+        function plusSlides(n) {
+          showSlides(slideIndex += n);
+        }
+        
+        function currentSlide(n) {
+          showSlides(slideIndex = n);
+        }
+        
+        function showSlides(n) {
+          var i;
+          var slides = document.getElementsByClassName("mySlides");
+          var dots = document.getElementsByClassName("demo");
+          var captionText = document.getElementById("caption");
+          if (n > slides.length) {slideIndex = 1}
+          if (n < 1) {slideIndex = slides.length}
+          for (i = 0; i < slides.length; i++) {
+              slides[i].style.display = "none";
+          }
+          for (i = 0; i < dots.length; i++) {
+              dots[i].className = dots[i].className.replace("active", "");
+          }
+          slides[slideIndex-1].style.display = "block";
+          dots[slideIndex-1].className += " active";
+          captionText.innerHTML = dots[slideIndex-1].alt;
+        }
+</script>
+</body>
+</html>
